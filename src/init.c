@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
+#include "../lib/libft/libft.h"
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	read_data(&data, argv[1]);
+	read_data(&data, ft_atoi(argv[1]));
 }

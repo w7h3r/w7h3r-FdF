@@ -12,9 +12,17 @@
 
 #include "../inc/fdf.h"
 #include "../lib/libft/libft.h"
+#include "../lib/get_next_line/get_next_line.h"
 #include <unistd.h>
+
+static	unsigned int	nl_counter(int fd)
+{
+
+}
 
 void	read_data(t_data *data, int fd)
 {
+	unsigned int	new_line;
 
+	new_line = nl_counter(fd);
 }
