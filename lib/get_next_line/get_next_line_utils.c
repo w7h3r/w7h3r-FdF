@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-unsigned int	ft_strlen(const char *c)
+unsigned int	gnl_strlen(const char *c)
 {
 	unsigned int	i;
 
@@ -24,7 +24,7 @@ unsigned int	ft_strlen(const char *c)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
 	unsigned int	i;
 
@@ -40,7 +40,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*free_imp(char *buffer, char *temp)
+char	*gnl_free_imp(char *buffer, char *temp)
 {
 	if (buffer)
 		free(buffer);
@@ -49,15 +49,15 @@ char	*free_imp(char *buffer, char *temp)
 	return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gnl_strjoin(char const *s1, char const *s2)
 {
 	unsigned int	i;
 	unsigned int	j;
 	char			*res;
 
-	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	res = malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2) + 1));
 	if (res == NULL)
-		return (free_imp((char *)s1, NULL));
+		return (gnl_free_imp((char *)s1, NULL));
 	i = 0;
 	if (s1)
 	{
@@ -74,6 +74,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	res[i + j] = '\0';
-	free_imp((char *)s1, NULL);
+	gnl_free_imp((char *)s1, NULL);
 	return (res);
 }

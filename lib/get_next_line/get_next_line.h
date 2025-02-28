@@ -18,9 +18,9 @@
 # endif
 
 char			*get_next_line(int fd);
-char			*ft_strchr(const char *s, int c);
-char			*ft_strjoin(char const *s1, char const *s2);
-char			*free_imp(char *buffer, char *temp);
-unsigned int	ft_strlen(const char *c);
+char			*gnl_strchr(const char *s, int c);
+char			*gnl_strjoin(char const *s1, char const *s2);
+char			*gnl_free_imp(char *buffer, char *temp);
+unsigned int	gnl_strlen(const char *c);
 
 #endif

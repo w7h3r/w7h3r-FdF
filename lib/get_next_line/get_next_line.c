@@ -26,10 +26,10 @@ static char	*new_buffer(char *buffer)
 	if (buffer[temp_len] == '\n')
 		temp_len++;
 	if (buffer[temp_len] == '\0')
-		return (free_imp(buffer, NULL));
-	temp = malloc(((ft_strlen(buffer) - temp_len) + 1) * sizeof(char));
+		return (gnl_free_imp(buffer, NULL));
+	temp = malloc(((gnl_strlen(buffer) - temp_len) + 1) * sizeof(char));
 	if (!temp)
-		return (free_imp(buffer, NULL));
+		return (gnl_free_imp(buffer, NULL));
 	i = 0;
 	while (buffer[temp_len + i] != '\0')
 	{
@@ -56,7 +56,7 @@ static char	*get_line(char *buffer)
 		temp_len++;
 	temp = malloc((temp_len + 1) * sizeof(char));
 	if (!temp)
-		return (free_imp(buffer, temp));
+		return (gnl_free_imp(buffer, temp));
 	i = 0;
 	while (i < temp_len)
 	{
@@ -75,19 +75,19 @@ static char	*get_and_merge(int fd, char *buffer)
 	temp = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	*temp = '\0';
 	if (!temp)
-		return (free_imp(buffer, NULL));
+		return (gnl_free_imp(buffer, NULL));
 	len = 426632;
-	while (len > 0 && (!ft_strchr(temp, '\n')))
+	while (len > 0 && (!gnl_strchr(temp, '\n')))
 	{
 		len = read(fd, temp, BUFFER_SIZE);
 		if (len < 0)
-			return (free_imp(buffer, temp));
+			return (gnl_free_imp(buffer, temp));
 		temp[len] = '\0';
-		buffer = ft_strjoin(buffer, temp);
+		buffer = gnl_strjoin(buffer, temp);
 		if (!buffer)
-			return (free_imp(NULL, temp));
+			return (gnl_free_imp(NULL, temp));
 	}
-	buffer[ft_strlen(buffer)] = '\0';
+	buffer[gnl_strlen(buffer)] = '\0';
 	free (temp);
 	return (buffer);
 }
