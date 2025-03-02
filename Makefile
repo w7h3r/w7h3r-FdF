@@ -6,7 +6,7 @@ LIBFT= libft.a
 PRINTF= libft.a
 MLX= libmlx.a
 
-all:
+all: $(LIBFT) $(NAME)
 
 lib:
 
