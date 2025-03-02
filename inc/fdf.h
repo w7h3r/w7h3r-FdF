@@ -13,6 +13,10 @@
 #ifndef FDF_H
 # define FDF_H
 
+#ifndef READ_BUFFER_SIZE
+# define READ_BUFFER_SIZE 512
+#endif
+
 typedef struct s_data {
 	char	**pos_info;
 }	t_data;
