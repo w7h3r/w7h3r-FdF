@@ -15,6 +15,7 @@
 #include "../lib/get_next_line/get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 static unsigned int	nl_counter(int fd)
 {
@@ -39,26 +40,28 @@ static unsigned int	nl_counter(int fd)
 	return (nl_count);
 }
 
-static int	insert_line(char *str)
+void	read_data(t_data *data, const char *file)
 {
-	return (0);
-}
+	char			*temp;
+	unsigned int	nl;
+	int				fd;
+	int				i;
 
-void	read_data(t_data *data, int fd)
-{
-	unsigned int	new_line;
-	unsigned int	i;
-
-	new_line = nl_counter(fd);
-	if (new_line > 0)
+	fd = open(file, O_RDONLY);
+	nl = nl_counter(fd);
+	if (nl > 0)
 	{
-		data->pos_info = malloc(sizeof(char *) * (new_line + 1));
-		data->pos_info[new_line] = NULL;
+		data->pos_info = malloc(sizeof(char **) * (nl + 1));
+		data->pos_info[nl] = NULL;
 	}
+	close(fd);
+	fd = open(file, O_RDONLY);
 	i = 0;
-	while (data->pos_info[i] != NULL)
+	while (i < nl)
 	{
-		data->pos_info[i] = get_next_line(fd);
+		temp = get_next_line(fd);
+		data->pos_info[i] = ft_split(temp, ' ');
+		free(temp);
 		i++;
 	}
 }
