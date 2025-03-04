@@ -20,7 +20,6 @@ void	free_map(t_data *map)
 {
 	int	i;
 	int	j;
-	int	k;
 
 	i = 0;
 	while (map->pos_info[i])
