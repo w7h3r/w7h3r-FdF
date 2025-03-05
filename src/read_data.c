@@ -12,82 +12,60 @@
 
 #include "../inc/fdf.h"
 #include "../lib/libft/libft.h"
+#include "../lib/ft_printf/include/ft_printf.h"
 #include "../lib/get_next_line/get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 
-static unsigned int	nl_counter(int fd)
+int	count_line(int fd)
 {
-	char			temp[READ_BUFFER_SIZE];
-	unsigned int	nl_count;
-	unsigned int	i;
-	int				bytes_read;
+	int		nl;
+	char	*temp;
 
-	nl_count = 0;
-	bytes_read = read(fd, temp, READ_BUFFER_SIZE);
-	while (bytes_read > 0)
+	nl = 0;
+	while (1)
 	{
-		i = 0;
-		while (i < bytes_read)
-		{
-			if (temp[i] == '\n')
-				nl_count++;
-			i++;
-		}
-		bytes_read = read(fd, temp, READ_BUFFER_SIZE);
+		temp = get_next_line(fd);
+		if (!temp)
+			break ;
+		else
+			nl++;
+		free(temp);
 	}
-	return (nl_count);
+	return (nl);
 }
 
-int		space_counter(char *str)
+void	insert_lines(t_data *data, int fd, int nl, int line_)
 {
-	int	i;
-
-	i = 0;
-	while (*str)
-	{
-		if (*str == ' ')
-			i++;
-		str++;
-	}
-	return (i);
-}
-
-int		*get_line(t_data *map_data, int fd)
-{
-	char	*buffer;
 	char	**temp;
+	char	*line;
 	int		i;
 
-	buffer = get_next_line(fd);
-	temp = ft_split(buffer, ' ');
+	line = get_next_line(fd);
+	temp = ft_split(line, ' ');
+	free(line);
 	i = 0;
-	i = space_counter(buffer);
-	if (i > 0)
+	while (temp[i])
 	{
-		map_data->map_info = malloc(sizeof(int *) * (i + 1));
-		map_data->color_map = malloc(sizeof(int *) * (i + 1));
-		if (!map_data->map_info || !map_data->color_map)
-			exit(0);
+		data->map.cells[line_][i].value = ft_atoi(temp[i]);
 	}
 }
 
-void	read_map_data(t_data *map_data, const char *file)
+void	read_map(t_data *map, const char *file)
 {
-	unsigned int	nl;
-	int				fd;
-	unsigned int	i;
+	int	fd;
+	int	nl;
+	int	i;
 
-	nl = nl_counter(fd);
-	if (nl > 0)
+	fd = open(file, O_RDONLY);
+	close(fd);
+	fd = open(file, O_RDONLY);
+	nl = count_line(fd);
+	i = 0;
+	while (i < nl)
 	{
-		map_data->map_info = malloc(sizeof(int **) * (nl + 1));
-		if (!map_data->map_info)
-			exit(0);
-	}
-	while (nl--)
-	{
-		map_data->map_info[i] = get_line(map_data, fd);
+		insert_lines(map, fd, nl, i);
+		i++;
 	}
 }

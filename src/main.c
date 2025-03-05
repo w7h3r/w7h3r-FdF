@@ -16,33 +16,9 @@
 #include "../lib/libft/libft.h"
 #include "../lib/ft_printf/include/ft_printf.h"
 
-void	free_map(t_data *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map->pos_info[i])
-	{
-		j = 0;
-		while (map->pos_info[i][j])
-		{
-			free(map->pos_info[i][j]);
-			map->pos_info[i][j] = NULL;
-			j++;
-		}
-		free(map->pos_info[i]);
-		map->pos_info[i] = NULL;
-		i++;
-	}
-	free(map->pos_info);
-	map->pos_info = NULL;
-}
-
 int	main(int argc, char **argv)
 {
-	t_data	map;
+	t_data	data;
 
-	read_data(&map, argv[1]);
-	free_map(&map);
+	read_map(&data, argv[1]);
 }
