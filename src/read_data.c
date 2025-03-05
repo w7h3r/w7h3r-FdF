@@ -40,28 +40,54 @@ static unsigned int	nl_counter(int fd)
 	return (nl_count);
 }
 
-void	read_data(t_data *data, const char *file)
+int		space_counter(char *str)
 {
-	char			*temp;
+	int	i;
+
+	i = 0;
+	while (*str)
+	{
+		if (*str == ' ')
+			i++;
+		str++;
+	}
+	return (i);
+}
+
+int		*get_line(t_data *map_data, int fd)
+{
+	char	*buffer;
+	char	**temp;
+	int		i;
+
+	buffer = get_next_line(fd);
+	temp = ft_split(buffer, ' ');
+	i = 0;
+	i = space_counter(buffer);
+	if (i > 0)
+	{
+		map_data->map_info = malloc(sizeof(int *) * (i + 1));
+		map_data->color_map = malloc(sizeof(int *) * (i + 1));
+		if (!map_data->map_info || !map_data->color_map)
+			exit(0);
+	}
+}
+
+void	read_map_data(t_data *map_data, const char *file)
+{
 	unsigned int	nl;
 	int				fd;
-	int				i;
+	unsigned int	i;
 
-	fd = open(file, O_RDONLY);
 	nl = nl_counter(fd);
 	if (nl > 0)
 	{
-		data->pos_info = malloc(sizeof(char **) * (nl + 1));
-		data->pos_info[nl] = NULL;
+		map_data->map_info = malloc(sizeof(int **) * (nl + 1));
+		if (!map_data->map_info)
+			exit(0);
 	}
-	close(fd);
-	fd = open(file, O_RDONLY);
-	i = 0;
-	while (i < nl)
+	while (nl--)
 	{
-		temp = get_next_line(fd);
-		data->pos_info[i] = ft_split(temp, ' ');
-		free(temp);
-		i++;
+		map_data->map_info[i] = get_line(map_data, fd);
 	}
 }
