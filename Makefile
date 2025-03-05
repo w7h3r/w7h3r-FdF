@@ -2,15 +2,14 @@ NAME= FdF
 CC= cc
 CFLAGS= -Wall -Wextra -Werror
 MLXFLAGS= -lXext -lX11 -lm
-LIBFT= libft.a
-PRINTF= libft.a
-MLX= libmlx.a
+LIBFT= lib/libft/libft.a
+PRINTF= lib/ft_printf/libftprintf.a
+MLX= lib/minilibx/libmlx.a
 SRC= src/init.c \
 	 src/main.c \
-	 read_data.c \
-	 lib/get_next_line.c \
-	 lib/get_next_line_utils.c \
-	 lib/get_next_line.h
+	 src/read_data.c \
+	 lib/get_next_line/get_next_line.c \
+	 lib/get_next_line/get_next_line_utils.c \
 
 OBJ= $(SRC:.c=.o)
 
@@ -34,6 +33,7 @@ $(MLX):
 re: fclean all
 
 clean:
+	rm -rf $(OBJ)
 	make -C lib/libft/ clean
 	make -C lib/ft_printf/ clean
 	make -C lib/minilibx/ clean
@@ -42,6 +42,5 @@ fclean: clean
 	rm -rf $(NAME)
 	make -C lib/libft/ fclean
 	make -C lib/ft_printf/ fclean
-	make -C lib/minilibx/ fclean
 
 .PHONY: all lib re clean fclean
