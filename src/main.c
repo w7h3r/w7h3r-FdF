@@ -18,7 +18,9 @@
 
 int	main(int argc, char **argv)
 {
+	if (argc != 2)
+		return (-1);
 	t_data	data;
 
-	read_map(&data, argv[1]);
+	read_data(&data, argv[1]);
 }

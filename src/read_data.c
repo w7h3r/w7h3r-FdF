@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:50:15 by muokcan           #+#    #+#             */
-/*   Updated: 2025/02/28 18:53:22 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:33:09 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,78 +18,100 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int	count_line(int fd)
+int		count_line_lenght(const char *file)
 {
-	int		nl;
+	int		len;
+	int		fd;
 	char	*temp;
+	char	**split_buffer;
 
-	nl = 0;
-	while (1)
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		exit(1);
+	temp = get_next_line(fd);
+	if (!temp)
+	{
+		close(fd);
+		exit(-1);
+	}
+	split_buffer = ft_split(temp, ' ');
+	len = 0;
+	while (split_buffer[len])
+		len++;
+	free_double(split_buffer);
+	free (temp);
+	close(fd);
+	return (len);
+}
+
+t_cell	insert_cells(char *cell)
+{
+	t_cell	res;
+	char	**split_buffer;
+
+	split_buffer = ft_split(cell, ',');
+	res.value = ft_atoi(split_buffer[0]);
+	res.color = ft_atoi_base(split_buffer[1], 16);
+	free_double(split_buffer);
+	return (res);
+}
+
+void	insert_map(t_map *map, const char *file)
+{
+	char	*temp;
+	char	**split_buffer;
+	int		fd;
+	int		row;
+	int		col;
+
+	fd = open(file, O_RDONLY);
+	row = 0;
+	while (row < map->y)
 	{
 		temp = get_next_line(fd);
+		//ft_printf("ROW: %d TEMP: %s\n", row, temp);
 		if (!temp)
 			break ;
-		else
-			nl++;
-		free(temp);
+		split_buffer = ft_split(temp, ' ');
+		col = 0;
+		while (col < map->x)
+		{
+			map->map_info[row][col] = insert_cells(split_buffer[col]);
+			//ft_printf("split_buffer[%d]: %s\n", col, split_buffer[col]);
+			col++;
+		}
+		row++;
 	}
-	return (nl);
+	ft_printf("VALUE: %d  COLOR: %d", map->map_info[3][2].value, map->map_info[3][2].color);
+	free(temp);
+	free_double(split_buffer);
+	close (fd);
 }
 
-char	*insert_cell(char *str, _Bool i)
+void	read_data(t_data *data, const char *file)
 {
+	int	nl_count;
+	int	row;
 
-}
-
-int		count_space(char *str)
-{
-	int	space_count;
-
-	space_count = 0;
-	while (*str)
+	nl_count = count_line(file);
+	data->map.y = nl_count;
+	data->map.x = count_line_lenght(file);
+	data->map.map_info = (t_cell **)malloc(sizeof(t_cell *) * data->map.y);
+	if (!data->map.map_info)
+		exit(0);
+	row = 0;
+	while (row < data->map.y)
 	{
-		if (*str == ' ')
-			space_count++;
-		str++;
+		data->map.map_info[row] = (t_cell *)malloc(sizeof(t_cell) * data->map.x);
+		if (!data->map.map_info[row])
+		{
+			while (row--)
+				free(data->map.map_info[row]);
+			free(data->map.map_info);
+			exit(1);
+		}
+		row++;
 	}
-	return (space_count);
+	insert_map(&data->map, file);
 }
 
-void	insert_lines(t_data *data, int fd, int line_)
-{
-	char	**temp;
-	char	*line;
-	int		i;
-	int		spc;
-
-	line = get_next_line(fd);
-	temp = ft_split(line, ' ');
-	spc = count_space(line);
-	free(line);
-	i = 0;
-	while (temp[i])
-	{
-		data->map.cells[line_] = malloc(sizeof(int *) * (spc + 1));
-		data->map.cells[line_][i].value = ft_atoi(insert_cell(temp[i], 0));
-		data->map.cells[line_][i].color = ft_atoi(insert_cell(temp[i], 1));
-		i++;
-	}
-}
-
-void	read_map(t_data *map, const char *file)
-{
-	int	fd;
-	int	nl;
-	int	i;
-
-	fd = open(file, O_RDONLY);
-	close(fd);
-	fd = open(file, O_RDONLY);
-	nl = count_line(fd);
-	i = 0;
-	while (i < nl)
-	{
-		insert_lines(map, fd, i);
-		i++;
-	}
-}

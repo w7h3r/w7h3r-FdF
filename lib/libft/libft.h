@@ -20,6 +20,7 @@
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_atoi(const char *nptr);
+int		ft_atoi_base(const char *nptr, int nptr_base);
 char	*ft_itoa(int n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);

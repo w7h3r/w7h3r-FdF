@@ -8,6 +8,7 @@ MLX= lib/minilibx/libmlx.a
 SRC= src/init.c \
 	 src/main.c \
 	 src/read_data.c \
+	 src/read_data_utils.c \
 	 lib/get_next_line/get_next_line.c \
 	 lib/get_next_line/get_next_line_utils.c \
 

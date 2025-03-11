@@ -4,6 +4,7 @@ CC = cc
 RM = rm -f
 AR = ar -rcs
 SRCS = ft_atoi.c \
+	   ft_atoi_base.c \
 	   ft_bzero.c \
 	   ft_calloc.c \
 	   ft_isalnum.c \
