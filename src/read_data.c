@@ -43,7 +43,7 @@ int	count_line_lenght(const char *file)
 	if (!temp)
 	{
 		close(fd);
-		exit(-1);
+		exit(1);
 	}
 	split_buffer = ft_split(temp, ' ');
 	len = 0;
@@ -62,16 +62,17 @@ t_cell	insert_cells(char *cell)
 	if (ft_strchr(cell, ','))
 	{
 		split_buffer = ft_split(cell, ',');
+		if (!split_buffer)
+			exit(1);
 		res.value = ft_atoi(split_buffer[0]);
 		res.color = ft_atoi_base(&split_buffer[1][2], 16);
+		free_double(split_buffer, NULL);
 	}
 	else
 	{
-		split_buffer = ft_split(cell, ',');
-		res.value = ft_atoi(split_buffer[0]);
+		res.value = ft_atoi(cell);
 		res.color = ft_atoi_base("0xFFFFFF", 16);
 	}
-		free_double(split_buffer, NULL);
 	return (res);
 }
 
@@ -98,10 +99,10 @@ void	insert_map(t_map *map, const char *file)
 			//ft_printf("split_buffer[%d]: %s\n", col, split_buffer[col]);
 			col++;
 		}
+		free_double(split_buffer, temp);
 		row++;
 	}
 	//ft_printf("VALUE: %d  COLOR: %d", map->inf[3][2].value, map->inf[3][2].color);
-	free_double(split_buffer, temp);
 	close (fd);
 }
 

@@ -42,14 +42,16 @@ void	free_double(char **str0, char *str1)
 {
 	int	i;
 
-	if (!str0 || !str1)
-		return ;
-	i = 0;
-	while (str0[i])
+	if (str0)
 	{
-		free(str0[i]);
-		i++;
+		i = 0;
+		while (str0[i])
+		{
+			free(str0[i]);
+			i++;
+		}
+		free(str0);
 	}
-	free(str0);
-	free(str1);
+	if (str1)
+		free(str1);
 }

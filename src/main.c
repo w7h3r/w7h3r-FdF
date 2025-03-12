@@ -16,6 +16,20 @@
 #include "../lib/libft/libft.h"
 #include "../lib/ft_printf/include/ft_printf.h"
 
+void free_map(t_map *map)
+{
+    int i;
+
+    // Her satırı serbest bırak
+    for (i = 0; i < map->y; i++)
+    {
+        free(map->inf[i]);
+    }
+    
+    // Map'in iki boyutlu dizisini serbest bırak
+    free(map->inf);
+}
+
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
@@ -35,4 +49,5 @@ int	main(int argc, char **argv)
 		ft_printf("\n");
 	}
 	ft_printf("X: %d    Y: %d", data.map.x, data.map.y);
+	free_map(&data.map);
 }
