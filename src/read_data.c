@@ -18,17 +18,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-/* 
- * It's not finished yet.
- *
- * There is a problem; if you give program a 100 column wide row, it count 0 to 100, which is 101.
- * And don't forget to fix 100.000's of ridiculous leaks.
- *
- * Also ft_atoi_base is a new function and might be unstable, check that. If it works, don't touch!!!
- *
- * Try testing it wtih test_maps/t2.fdf!
- */
-
 int	count_line_lenght(const char *file)
 {
 	int		len;
