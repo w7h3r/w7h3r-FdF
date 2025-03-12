@@ -34,4 +34,5 @@ int	main(int argc, char **argv)
     	}
 		ft_printf("\n");
 	}
+	ft_printf("X: %d    Y: %d", data.map.x, data.map.y);
 }
