@@ -23,4 +23,15 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	read_data(&data, argv[1]);
+	for (int i = 0; i < data.map.y; i++)
+	{
+		for(int j = 0; j < data.map.x; j++)
+    	{
+        	ft_printf("Value at [%d][%d]: %d, Color: %d\n",
+            	      i, j,
+                	  data.map.inf[i][j].value,    // Print the value
+                 	 data.map.inf[i][j].color);  // Print the color
+    	}
+		ft_printf("\n");
+	}
 }

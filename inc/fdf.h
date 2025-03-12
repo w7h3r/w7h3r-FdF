@@ -23,7 +23,7 @@ typedef struct s_cell {
 }	t_cell;
 
 typedef struct s_map {
-	t_cell	**map_info;
+	t_cell	**inf;
 	int		x;
 	int		y;
 }	t_map;
@@ -36,6 +36,6 @@ void	read_data(t_data *data, const char *file);
 
 int		count_line(const char *file);
 int		count_space(const char *file);
-void	free_double(char **str);
+void	free_double(char **str0, char *str1);
 
 #endif
