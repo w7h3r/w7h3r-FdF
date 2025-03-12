@@ -96,13 +96,11 @@ void	insert_map(t_map *map, const char *file)
 		while (col < map->x)
 		{
 			map->inf[row][col] = insert_cells(split_buffer[col]);
-			//ft_printf("split_buffer[%d]: %s\n", col, split_buffer[col]);
 			col++;
 		}
 		free_double(split_buffer, temp);
 		row++;
 	}
-	//ft_printf("VALUE: %d  COLOR: %d", map->inf[3][2].value, map->inf[3][2].color);
 	close (fd);
 }
 
