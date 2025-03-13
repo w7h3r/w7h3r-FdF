@@ -17,6 +17,9 @@
 # define READ_BUFFER_SIZE 512
 #endif
 
+# define WIN_H 1800
+# define WIN_W 1200
+
 typedef struct s_cell {
 	int	value;
 	int	color;
@@ -30,6 +33,8 @@ typedef struct s_map {
 
 typedef struct s_data {
 	t_map	map;
+	void	*mlx;
+	void	*win;
 }	t_data;
 
 void	read_data(t_data *data, const char *file);
