@@ -16,18 +16,23 @@
 #include "../lib/libft/libft.h"
 #include "../lib/ft_printf/include/ft_printf.h"
 
-void free_map(t_map *map)
+void	free_map(t_map *map)
 {
     int i;
 
-    // Her satırı serbest bırak
-    for (i = 0; i < map->y; i++)
+	i = 0;
+    while (i < map->y)
     {
         free(map->inf[i]);
+		i++;
     }
-    
-    // Map'in iki boyutlu dizisini serbest bırak
     free(map->inf);
+}
+
+void	init_window(t_data *data)
+{
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, WIN_W, WIN_H, "AAAAAAAAAAAAa");
 }
 
 int	main(int argc, char **argv)
@@ -49,5 +54,6 @@ int	main(int argc, char **argv)
 		ft_printf("\n");
 	}
 	ft_printf("X: %d    Y: %d", data.map.x, data.map.y);
+	init_window(&data);
 	free_map(&data.map);
 }
