@@ -12,6 +12,7 @@
 
 #include "../lib/get_next_line/get_next_line.h"
 #include "../lib/libft/libft.h"
+#include "../inc/fdf.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -54,4 +55,17 @@ void	free_double(char **str0, char *str1)
 	}
 	if (str1)
 		free(str1);
+}
+
+void	free_map(t_map *map)
+{
+    int i;
+
+	i = 0;
+    while (i < map->y)
+    {
+        free(map->inf[i]);
+		i++;
+    }
+    free(map->inf);
 }
