@@ -42,7 +42,7 @@ void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
 	{
 		if (x0 == x1 && y0 == y1)
 			break ;
-
+		
 	}
 }
 

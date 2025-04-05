@@ -22,8 +22,7 @@ void	printf_map(t_data data);
 void	init_window(t_data *data)
 {
 	data->mlx.mlx = mlx_init();
-	data->mlx.win = mlx_new_window(data->mlx.mlx, WIN_W, WIN_H, "AAAAAAAAAAAAa");
-	//mlx_string_put(data->mlx, data->win, 90, 90, 255, "Hello World!");
+	//data->mlx.win = mlx_new_window(data->mlx.mlx, WIN_W, WIN_H, "AAAAAAAAAAAAa");
 	data->mlx.img = mlx_new_image(data->mlx.mlx, data->map.x, data->map.y);
 	mlx_loop(data->mlx.mlx);
 }
@@ -35,7 +34,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	read_data(&data, argv[1]);
-//	printf_map(data);
+	printf_map(data);
 	init_window(&data);
 	free_map(&data.map);
 }
@@ -46,8 +45,10 @@ void	printf_map(t_data data)
 	{
 		for(int j = 0; j < data.map.x; j++)
     	{
-        	ft_printf("Value at [%d][%d]: %d, Color: %d\n",
+        	ft_printf("Value at [%d][%d]: %d %d %d, Color: %d\n",
             	      i, j,
+					  data.map.inf[i][j].x,
+					  data.map.inf[i][j].y,
                 	  data.map.inf[i][j].value,    // Print the value
                  	 data.map.inf[i][j].color);  // Print the color
     	}

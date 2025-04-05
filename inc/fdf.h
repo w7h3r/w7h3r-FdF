@@ -17,10 +17,9 @@
 # define READ_BUFFER_SIZE 512
 #endif
 
-# define WIN_H 720
-# define WIN_W 1280
-
 typedef struct s_cell {
+	int	x;
+	int	y;
 	int	value;
 	int	color;
 }	t_cell;
@@ -35,8 +34,10 @@ typedef struct s_map {
 typedef struct s_pos {
 	int	x0;
 	int	y0;
+	int	z0;
 	int	x1;
 	int	y1;
+	int	z1;
 }	t_pos;
 
 typedef struct s_mlx {
@@ -51,7 +52,6 @@ typedef struct s_mlx {
 
 typedef struct s_data {
 	t_map	map;
-	t_pos	p_pos;
 	t_mlx	mlx;
 }	t_data;
 

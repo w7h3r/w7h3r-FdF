@@ -74,21 +74,21 @@ void	insert_map(t_map *map, const char *file)
 	int		col;
 
 	fd = open(file, O_RDONLY);
-	row = 0;
-	while (row < map->y)
+	row = -1;
+	while (++row < map->y)
 	{
 		temp = get_next_line(fd);
 		if (!temp)
 			break ;
 		split_buffer = ft_split(temp, ' ');
-		col = 0;
-		while (col < map->x)
+		col = -1;
+		while (++col < map->x)
 		{
 			map->inf[row][col] = insert_cells(split_buffer[col]);
-			col++;
+			map->inf[row][col].x = col;
+			map->inf[row][col].y = row;
 		}
 		free_double(split_buffer, temp);
-		row++;
 	}
 	close (fd);
 }
