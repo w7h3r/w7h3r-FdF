@@ -29,9 +29,10 @@ void	init_window(t_data *data)
 
 int	main(int argc, char **argv)
 {
+	t_data	data;
+
 	if (argc != 2)
 		return (-1);
-	t_data	data;
 
 	read_data(&data, argv[1]);
 	printf_map(data);
@@ -45,7 +46,7 @@ void	printf_map(t_data data)
 	{
 		for(int j = 0; j < data.map.x; j++)
     	{
-        	ft_printf("Value at [%d][%d]: %d %d %d, Color: %d\n",
+        	ft_printf("Value at [%d][%d]: x:%d y:%d z:%d, Color: %d\n",
             	      i, j,
 					  data.map.inf[i][j].x,
 					  data.map.inf[i][j].y,

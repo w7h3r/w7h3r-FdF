@@ -17,6 +17,15 @@
 # define READ_BUFFER_SIZE 512
 #endif
 
+/*
+ *	t_cell is a struct that contains info of each point on the map. 
+ *
+ *	Value represents 'z' coordinate in fact and i know it must be defined in a more clear way.
+ *	Nevertheless i'm too lazy to modify every fucking file in project, so i'll leave it be.
+ *
+ *	in t_map x is width and y is height of map. Sorry for my bad naming again.
+ */
+
 typedef struct s_cell {
 	int	x;
 	int	y;

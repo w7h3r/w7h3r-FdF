@@ -59,13 +59,13 @@ void	free_double(char **str0, char *str1)
 
 void	free_map(t_map *map)
 {
-    int i;
+	int	i;
 
 	i = 0;
-    while (i < map->y)
-    {
-        free(map->inf[i]);
+	while (i < map->y)
+	{
+		free(map->inf[i]);
 		i++;
-    }
-    free(map->inf);
+	}
+	free(map->inf);
 }

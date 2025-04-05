@@ -26,24 +26,8 @@ void	pixel_put_to_image(t_data *data, int x, int y, int color)
 {
 }
 
-void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
+void	draw_line(t_data *data)
 {
-	int	x;
-	int	y;
-	int	x_delta;
-	int	y_delta;
-	int	err;
-
-	x_delta = int_abs(x0 - x1);
-	y_delta = int_abs(y0 - y1);
-	err = x_delta - y_delta;
-
-	while (1)
-	{
-		if (x0 == x1 && y0 == y1)
-			break ;
-		
-	}
 }
 
 void	put_map(t_data *data)

@@ -65,6 +65,19 @@ t_cell	insert_cells(char *cell)
 	return (res);
 }
 
+int	check_fd(t_map *map, const char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		free_map(map);
+		exit (1);
+	}
+	return (fd);
+}
+
 void	insert_map(t_map *map, const char *file)
 {
 	char	*temp;
@@ -73,7 +86,7 @@ void	insert_map(t_map *map, const char *file)
 	int		row;
 	int		col;
 
-	fd = open(file, O_RDONLY);
+	fd = check_fd(map, file);
 	row = -1;
 	while (++row < map->y)
 	{
