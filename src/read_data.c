@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:50:15 by muokcan           #+#    #+#             */
-/*   Updated: 2025/03/10 15:33:09 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/11 00:01:16 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+
+int	ft_strcspn(char *str, char c)
+{
+	int	target_idx;
+
+	target_idx = 0;
+	while (str[target_idx])
+	{
+		if (str[target_idx] == c)
+			break ;
+		target_idx++;
+	}
+	return (target_idx);
+}
 
 int	count_line_lenght(const char *file)
 {
@@ -34,6 +48,7 @@ int	count_line_lenght(const char *file)
 		close(fd);
 		exit(1);
 	}
+	temp[ft_strcspn(temp, '\n')] = '\0';
 	split_buffer = ft_split(temp, ' ');
 	len = 0;
 	while (split_buffer[len])
