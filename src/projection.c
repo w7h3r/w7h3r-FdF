@@ -44,7 +44,6 @@ t_pos	isometric_points(t_cell first, t_cell second)
 	second.y *= SCALE;
 	apply_isometric_to_point(&first.x, &first.y, first.value);
 	apply_isometric_to_point(&second.x, &second.y, second.value);
-	// shift the map to the center of window
 	first.x += W_HE / 2;
 	first.y += W_WI / 2;
 	second.x += W_HE / 2;

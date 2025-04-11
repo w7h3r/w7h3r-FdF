@@ -28,7 +28,10 @@ int	main(int argc, char **argv)
 
 	read_data(&data, argv[1]);
 	init(&data.mlx);
+
+	put_pixel_to_img(data.mlx.mlx, 400, 300, 0xFFFFFF);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
+
 	mlx_loop(data.mlx.mlx);
 //	printf_map(data);
 	free_map(&data.map);

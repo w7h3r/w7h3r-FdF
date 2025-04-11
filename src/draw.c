@@ -17,7 +17,7 @@
  * draw_line() is a re-implementation of bressenham's line algorithm to this project.
  */
 
-static void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
+void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
 {
 	int	*dst;
 
@@ -42,6 +42,7 @@ void	draw_line(t_data *data, t_pos pos)
 {
 	t_line line;
 
+	put_pixel_to_img(data->mlx.mlx, 400, 300, 0xFFFFFF); // Orta noktada beyaz bir piksel çiz
 	line.dx = abs(pos.x1 - pos.x0);
 	line.dy = abs(pos.y1 - pos.y0);
 	draw_line_controls(&line, &pos);

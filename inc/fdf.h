@@ -22,7 +22,7 @@
 
 # define W_HE 600
 # define W_WI 800
-# define SCALE 10
+# define SCALE 2
 
 /*
  *	t_cell is a struct that contains info of each point on the map. 
@@ -87,6 +87,7 @@ int		count_line(const char *file);
 int		count_space(const char *file);
 void	free_double(char **str0, char *str1);
 void	free_map(t_map *map);
+void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
 
 int	abs(int	num);
 
