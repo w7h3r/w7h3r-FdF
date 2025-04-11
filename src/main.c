@@ -18,7 +18,8 @@
 #include "../lib/ft_printf/include/ft_printf.h"
 
 void	printf_map(t_data data);
-
+void fill_image_with_color(t_data *data, int color);
+ 
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -29,7 +30,7 @@ int	main(int argc, char **argv)
 	read_data(&data, argv[1]);
 	init(&data.mlx);
 
-	put_pixel_to_img(data.mlx.mlx, 400, 300, 0xFFFFFF);
+	draw_map(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
 
 	mlx_loop(data.mlx.mlx);

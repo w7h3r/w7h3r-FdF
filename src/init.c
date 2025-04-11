@@ -52,5 +52,4 @@ void init(t_mlx *data)
     }
 }
 
-
 void	free_mlx(t_data *data);
