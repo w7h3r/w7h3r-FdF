@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:16:00 by muokcan           #+#    #+#             */
-/*   Updated: 2025/03/14 01:35:48 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/11 02:24:55 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 #ifndef READ_BUFFER_SIZE
 # define READ_BUFFER_SIZE 512
 #endif
+
+# define SIN_30 0.866025
+# define COS_30 0.5
+
+# define W_HE 600
+# define W_WI 800
+# define SCALE 10
 
 /*
  *	t_cell is a struct that contains info of each point on the map. 
@@ -37,7 +44,6 @@ typedef struct s_map {
 	t_cell	**inf;
 	int		x;
 	int		y;
-	int		scale;
 }	t_map;
 
 typedef struct s_pos {
@@ -49,6 +55,15 @@ typedef struct s_pos {
 	int	z1;
 }	t_pos;
 
+typedef struct s_line {
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+}	t_line;
+	
 typedef struct s_mlx {
 	void	*mlx;
 	void	*win;
@@ -65,10 +80,14 @@ typedef struct s_data {
 }	t_data;
 
 void	read_data(t_data *data, const char *file);
+t_pos	isometric_points(t_cell first, t_cell second);
 
+void	init(t_mlx *data);
 int		count_line(const char *file);
 int		count_space(const char *file);
 void	free_double(char **str0, char *str1);
 void	free_map(t_map *map);
+
+int	abs(int	num);
 
 #endif

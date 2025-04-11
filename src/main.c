@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:19:06 by muokcan           #+#    #+#             */
-/*   Updated: 2025/03/14 01:36:55 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/11 02:43:12 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@
 
 void	printf_map(t_data data);
 
-void	init_window(t_data *data)
-{
-	data->mlx.mlx = mlx_init();
-	//data->mlx.win = mlx_new_window(data->mlx.mlx, WIN_W, WIN_H, "AAAAAAAAAAAAa");
-	data->mlx.img = mlx_new_image(data->mlx.mlx, data->map.x, data->map.y);
-	mlx_loop(data->mlx.mlx);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -35,8 +27,10 @@ int	main(int argc, char **argv)
 		return (-1);
 
 	read_data(&data, argv[1]);
-	printf_map(data);
-	init_window(&data);
+	init(&data.mlx);
+	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
+	mlx_loop(data.mlx.mlx);
+//	printf_map(data);
 	free_map(&data.map);
 }
 
