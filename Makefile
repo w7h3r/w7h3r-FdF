@@ -1,6 +1,6 @@
 NAME= FdF
 CC= cc
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror -g
 MLXFLAGS= -lXext -lX11 -lm
 LIBFT= lib/libft/libft.a
 PRINTF= lib/ft_printf/libftprintf.a
