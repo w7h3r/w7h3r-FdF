@@ -44,10 +44,10 @@ t_pos	isometric_points(t_cell first, t_cell second)
 	second.y *= SCALE;
 	apply_isometric_to_point(&first.x, &first.y, first.value);
 	apply_isometric_to_point(&second.x, &second.y, second.value);
-	first.x += W_HE / 2;
-	first.y += W_WI / 2;
-	second.x += W_HE / 2;
-	second.y += W_WI / 2;
+	first.x += W_WI / 2 - (5 * SCALE - 5);
+	first.y += W_HE / 2 - (5 * SCALE - 5);
+	second.x += W_WI / 2 - (5 * SCALE - 5);
+	second.y += W_HE / 2 - (5 * SCALE - 5);
 	pos.x0 = first.x;
 	pos.y0 = first.y;
 	pos.z0 = first.value;

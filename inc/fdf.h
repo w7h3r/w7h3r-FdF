@@ -17,12 +17,12 @@
 # define READ_BUFFER_SIZE 512
 #endif
 
-# define SIN_30 0.866025
+# define SIN_30 0.426025
 # define COS_30 0.5
 
 # define W_HE 1200
 # define W_WI 1600
-# define SCALE 15
+# define SCALE 30
 
 /*
  *	t_cell is a struct that contains info of each point on the map. 
