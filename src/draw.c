@@ -23,7 +23,7 @@ void put_pixel_to_img(t_data *data, int x, int y, int color)
     int *pixel;
 
     if (x < 0 || y < 0 || x >= W_WI || y >= W_HE)
-		return;  // Ekranın dışına taşan piksellere çizim yapma
+		return;
 	pixel = (int *)(data->mlx.addr + (y * data->mlx.l_len + x * (data->mlx.bitbp / 8)));
 	*pixel = color;
 }
@@ -50,7 +50,7 @@ void	draw_line(t_data *data, t_pos pos)
 	draw_line_controls(&line, &pos);
 	while (1)
 	{   
-		ft_printf("Put pixel at (%d, %d)\n", pos.x0, pos.y0);
+		//ft_printf("Put pixel at (%d, %d)\n", pos.x0, pos.y0);
 		put_pixel_to_img(data, pos.x0, pos.y0, 0xFFFFFF);
 		if (pos.x0 == pos.x1 && pos.y0 == pos.y1)
 			break ;
