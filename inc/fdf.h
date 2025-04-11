@@ -20,9 +20,9 @@
 # define SIN_30 0.866025
 # define COS_30 0.5
 
-# define W_HE 1600
-# define W_WI 1800
-# define SCALE 20
+# define W_HE 1200
+# define W_WI 1600
+# define SCALE 15
 
 /*
  *	t_cell is a struct that contains info of each point on the map. 
