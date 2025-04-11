@@ -17,12 +17,12 @@
 # define READ_BUFFER_SIZE 512
 #endif
 
-# define SIN_30 0.426025
+# define SIN_30 0.316025
 # define COS_30 0.5
 
 # define W_HE 1200
 # define W_WI 1600
-# define SCALE 30
+# define SCALE 6
 
 /*
  *	t_cell is a struct that contains info of each point on the map. 
@@ -82,7 +82,7 @@ typedef struct s_data {
 void	read_data(t_data *data, const char *file);
 t_pos	isometric_points(t_cell first, t_cell second);
 
-void	init(t_mlx *data);
+void	init(t_data *data);
 int		count_line(const char *file);
 int		count_space(const char *file);
 void	free_double(char **str0, char *str1);

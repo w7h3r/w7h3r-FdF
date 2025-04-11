@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		return (-1);
 
 	read_data(&data, argv[1]);
-	init(&data.mlx);
+	init(&data);
 
 	draw_map(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);

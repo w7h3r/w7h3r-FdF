@@ -14,42 +14,27 @@
 #include "../lib/minilibx/mlx.h"
 #include "../lib/ft_printf/include/ft_printf.h"
 
-/*
-void	init(t_mlx *data)
+void	err_exit_init(t_data *data)
 {
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, W_WI, W_HE, "FdF");
-	data->img = mlx_new_image(data->mlx, W_WI, W_HE);
-	data->addr = mlx_get_data_addr(data->img, &data->bitbp, \
-			&data->l_len, &data->endian);
+	(void)data;
+	return ;
 }
-*/
 
-void init(t_mlx *data)
+void	init(t_data *data)
 {
-    data->mlx = mlx_init();
-    if (!data->mlx) {
-        ft_printf("Error: mlx_init failed\n");
-        return;  // Error handling here
-    }
-    
-    data->win = mlx_new_window(data->mlx, W_WI, W_HE, "FdF");
-    if (!data->win) {
-        ft_printf("Error: Window creation failed\n");
-        return;  // Error handling here
-    }
-    
-    data->img = mlx_new_image(data->mlx, W_WI, W_HE);
-    if (!data->img) {
-        ft_printf("Error: Image creation failed\n");
-        return;  // Error handling here
-    }
-    
-    data->addr = mlx_get_data_addr(data->img, &data->bitbp, &data->l_len, &data->endian);
-    if (!data->addr) {
-        ft_printf("Error: mlx_get_data_addr failed\n");
-        return;  // Error handling here
-    }
+    data->mlx.mlx = mlx_init();
+    if (!data->mlx.mlx)
+		err_exit_init(data);
+	data->mlx.win = mlx_new_window(data->mlx.mlx, W_WI, W_HE, "FdF");
+    if (!data->mlx.win)
+		err_exit_init(data);
+   	data->mlx.img = mlx_new_image(data->mlx.mlx, W_WI, W_HE);
+    if (!data->mlx.img)
+		err_exit_init(data);
+	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bitbp, \
+			&data->mlx.l_len, &data->mlx.endian);
+    if (!data->mlx.addr)
+		err_exit_init(data);
 }
 
 void	free_mlx(t_data *data);
