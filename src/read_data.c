@@ -18,20 +18,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int	ft_strcspn(char *str, char c)
-{
-	int	target_idx;
-
-	target_idx = 0;
-	while (str[target_idx])
-	{
-		if (str[target_idx] == c)
-			break ;
-		target_idx++;
-	}
-	return (target_idx);
-}
-
 int	count_line_lenght(const char *file)
 {
 	int		len;
