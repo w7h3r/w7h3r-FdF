@@ -31,7 +31,7 @@ int	ft_atoi_base(const char *nptr, int nptr_base)
 	int			res;
 	short int	sign;
 
-	if (nptr_base < 2 && nptr_base > 16)
+	if (nptr_base < 2 || nptr_base > 16)
 		return (0);
 	res = 0;
 	while (ft_isspace(*nptr))
