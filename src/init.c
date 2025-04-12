@@ -23,6 +23,7 @@ void	free_data(t_data *data)
 		mlx_destroy_window(data->mlx.mlx, data->mlx.win);
 	if (data->mlx.mlx)
 		mlx_destroy_display(data->mlx.mlx);
+	free(data->mlx.mlx);
 	free_map(&data->map);
 }
 
@@ -37,7 +38,7 @@ void	init(t_data *data)
 {
 	data->mlx.mlx = mlx_init();
 	if (!data->mlx.mlx)
-		err_exit_init(data, "Error: Can't initialize mlx.");
+		err_exit_init(data, "Error: Can't initialize mlx");
 	data->mlx.win = mlx_new_window(data->mlx.mlx, W_WI, W_HE, "FdF");
 	if (!data->mlx.win)
 		err_exit_init(data, "Error: Can't initialize window");

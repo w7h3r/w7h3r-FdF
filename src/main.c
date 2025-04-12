@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	read_data(&data, argv[1]);
 	init(&data);
 	calculate_z_scale(&data.map);
-	ft_printf("%d\n", data.map.z_scale);
 	draw_map(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
 	hook_inputs(&data);

@@ -20,9 +20,9 @@
 # define V_FACTOR 0.21
 # define H_FACTOR 0.51
 
-# define W_HE 1200
-# define W_WI 1600
-# define SCALE 21
+# define W_HE 600
+# define W_WI 800
+# define SCALE 6
 
 /*
  *	t_cell is a struct that contains info of each point on the map. 
