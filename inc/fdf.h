@@ -20,9 +20,8 @@
 # define V_FACTOR 0.21
 # define H_FACTOR 0.51
 
-# define W_HE 600
-# define W_WI 800
-# define SCALE 6
+# define W_HE 800
+# define W_WI 1200
 
 /*
  *	t_cell is a struct that contains info of each point on the map. 
@@ -44,13 +43,8 @@ typedef struct s_map {
 	t_cell	**inf;
 	int		x;
 	int		y;
-	int		z_scale;
+	int		scale;
 }	t_map;
-
-typedef struct s_pmap {
-	int	p_x;
-	int	p_y;
-}	t_pmap;
 
 typedef struct s_color {
 	int		steps;
@@ -94,7 +88,7 @@ typedef struct s_data {
 
 void	read_data(t_data *data, const char *file);
 int		ft_strcspn(char *str, char c);
-t_pos	isometric_points(t_cell first, t_cell second, int z_scale);
+t_pos	isometric_points(t_cell first, t_cell second, float scale);
 
 void	init(t_data *data);
 int		count_line(const char *file);
@@ -104,8 +98,8 @@ void	free_map(t_map *map);
 void	free_data(t_data *data);
 void	put_pixel_to_img(t_data *data, int x, int y, int color);
 void	draw_map(t_data *data);
-void	calculate_z_scale(t_map *map);
 void	hook_inputs(t_data *data);
+float	get_scale(t_map map);
 
 void	set_color(t_color *clr);
 int		color_inter(float ratio, int f_color, int s_color);

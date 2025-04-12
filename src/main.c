@@ -38,7 +38,6 @@ int	main(int argc, char **argv)
 	read_data(&data, argv[1]);
 	ft_printf("COLOR OF FIRST CELL: %d\n", data.map.inf[0][0].color);
 	init(&data);
-	calculate_z_scale(&data.map);
 	draw_map(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
 	hook_inputs(&data);

@@ -83,13 +83,13 @@ static void	draw_hv_lines(t_data *data, t_pos *pos, int x, int y)
 	if (x < data->map.x - 1)
 	{
 		*pos = isometric_points(data->map.inf[y][x], \
-				data->map.inf[y][x + 1], data->map.z_scale);
+				data->map.inf[y][x + 1], data->map.scale);
 		draw_line(data, *pos, data->map.inf[y][x].color, data->map.inf[y][x + 1].color);
 	}
 	if (y < data->map.y - 1)
 	{
 		*pos = isometric_points(data->map.inf[y][x], \
-				data->map.inf[y + 1][x], data->map.z_scale);
+				data->map.inf[y + 1][x], data->map.scale);
 		draw_line(data, *pos, data->map.inf[y][x].color, data->map.inf[y + 1][x].color);
 	}
 }
@@ -100,6 +100,7 @@ void	draw_map(t_data *data)
 	int		x;
 	int		y;
 
+	data->map.scale = get_scale(data->map);
 	y = 0;
 	while (y < data->map.y)
 	{

@@ -22,54 +22,41 @@
  * Multiply the x and y points positions as scale, apply isometric projection to points
  * and shift the map through the center of the window.
  */
-static void	apply_isometric_to_point(int *x, int *y, int z, int z_scale)
+static void	apply_isometric_to_point(int *x, int *y, int z, int scale)
 {
 	int	base_x;
 	int	base_y;
 
-	(void)z_scale;
+	(void)scale;
 	base_x = *x;
 	base_y = *y;
 	*x = (base_x - base_y) * H_FACTOR;
 	*y = (base_x + base_y) * V_FACTOR - z;
 }
 
-void	calculate_z_scale(t_map *map)
+float	get_scale(t_map map)
 {
-	int	col;
-	int	row;
-	int	min;
-	int	max;
+	float	x_scale;
+	float	y_scale;
 
-	min = map->inf[0][0].value;
-	max = map->inf[0][0].value;
-	row = 0;
-	while (row < map->y)
-	{
-		col = 0;
-		while (col < map->x)
-		{
-			if (min > map->inf[row][col].value)
-				min = map->inf[row][col].value;
-			if (max < map->inf[row][col].value)
-				max = map->inf[row][col].value;
-			col++;
-		}
-		row++;
-	}
-	map->z_scale = max - min;
+	x_scale = (float)W_WI / map.x;
+	y_scale = (float)W_HE / map.y;
+	if (x_scale >= y_scale)
+		return (x_scale);
+	else
+		return (y_scale - 30);
 }
 
-t_pos	isometric_points(t_cell first, t_cell second, int z_scale)
+t_pos	isometric_points(t_cell first, t_cell second, float scale)
 {
 	t_pos	pos;
 
-	first.x *= SCALE;
-	first.y *= SCALE;
-	second.x *= SCALE;
-	second.y *= SCALE;
-	apply_isometric_to_point(&first.x, &first.y, first.value, z_scale);
-	apply_isometric_to_point(&second.x, &second.y, second.value, z_scale);
+	first.x *= scale;
+	first.y *= scale;
+	second.x *= scale;
+	second.y *= scale;
+	apply_isometric_to_point(&first.x, &first.y, first.value, scale);
+	apply_isometric_to_point(&second.x, &second.y, second.value, scale);
 	first.x += W_WI / 2;
 	first.y += W_HE / 2;
 	second.x += W_WI / 2;
