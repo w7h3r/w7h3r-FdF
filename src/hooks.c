@@ -14,21 +14,24 @@
 #include "../inc/fdf.h"
 #include <stdlib.h>
 
+int	close_win(void *param)
+{
+	t_data	*data;
+
+	data = (void *)param;
+	free_data(data);
+	exit (0);
+}
+
 int	key_hook(int keycode, void *param)
 {
-	t_data *data;
-
-	data = (t_data *)param;
-	(void)data;
 	if (keycode == 65307)
-	{
-		free_data(data);
-		exit (0);
-	}
+		close_win(param);
 	return (0);
 }
 
 void	hook_inputs(t_data *data)
 {
+	mlx_hook(data->mlx.win, 17, 0, close_win, data);
 	mlx_key_hook(data->mlx.win, key_hook, data);
 }

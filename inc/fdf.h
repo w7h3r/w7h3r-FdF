@@ -47,6 +47,11 @@ typedef struct s_map {
 	int		z_scale;
 }	t_map;
 
+typedef struct s_pmap {
+	int	p_x;
+	int	p_y;
+}	t_pmap;
+
 typedef struct s_color {
 	int		steps;
 	int		curr_step;
