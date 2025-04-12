@@ -19,9 +19,11 @@
  * SCALE is a constant define. This isn't a sustainable practice though.
  * 
  * in isometric points();
- * Multiply the x and y points positions as scale, apply isometric projection to points
+ * Multiply the x and y points positions as scale,
+ * apply isometric projection to points
  * and shift the map through the center of the window.
  */
+
 static void	apply_isometric_to_point(int *x, int *y, int z, int scale)
 {
 	int	base_x;

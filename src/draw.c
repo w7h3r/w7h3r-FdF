@@ -6,22 +6,11 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:58:24 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/12 21:19:26 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/13 02:34:14 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
-
-void	put_pixel_to_img(t_data *data, int x, int y, int color)
-{
-    int	*pixel;
-
-    if (x < 0 || y < 0 || x >= W_WI || y >= W_HE)
-		return ;
-	pixel = (int *)(data->mlx.addr + \
-			(y * data->mlx.l_len + x * (data->mlx.bitbp / 8)));
-	*pixel = color;
-}
 
 static void	draw_line_controls(t_line *line, t_pos *pos)
 {
@@ -38,17 +27,17 @@ static void	draw_line_controls(t_line *line, t_pos *pos)
 
 static void	line_control(t_pos *pos, t_line *line)
 {
-		line->e2 = 2 * line->err;
-		if (line->e2 > -line->dy)
-		{
-			line->err -= line->dy;
-			pos->x0 += line->sx;
-		}
-		if (line->e2 < line->dx)
-		{
-			line->err += line->dx;
-			pos->y0 += line->sy;
-		}
+	line->e2 = 2 * line->err;
+	if (line->e2 > -line->dy)
+	{
+		line->err -= line->dy;
+		pos->x0 += line->sx;
+	}
+	if (line->e2 < line->dx)
+	{
+		line->err += line->dx;
+		pos->y0 += line->sy;
+	}
 }
 
 static void	draw_line(t_data *data, t_pos pos, int f_color, int s_color)
@@ -84,13 +73,15 @@ static void	draw_hv_lines(t_data *data, t_pos *pos, int x, int y)
 	{
 		*pos = isometric_points(data->map.inf[y][x], \
 				data->map.inf[y][x + 1], data->map.scale);
-		draw_line(data, *pos, data->map.inf[y][x].color, data->map.inf[y][x + 1].color);
+		draw_line(data, *pos, data->map.inf[y][x].color, \
+				data->map.inf[y][x + 1].color);
 	}
 	if (y < data->map.y - 1)
 	{
 		*pos = isometric_points(data->map.inf[y][x], \
 				data->map.inf[y + 1][x], data->map.scale);
-		draw_line(data, *pos, data->map.inf[y][x].color, data->map.inf[y + 1][x].color);
+		draw_line(data, *pos, data->map.inf[y][x].color, \
+				data->map.inf[y + 1][x].color);
 	}
 }
 

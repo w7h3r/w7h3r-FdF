@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:07:01 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/12 20:54:43 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/13 02:35:16 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,6 @@ static int	get_b(int color)
 static int	get_rgb(int r, int g, int b)
 {
 	return ((r << 16) | (g << 8) | b);
-}
-
-void	set_color(t_color *clr)
-{
-	if (clr->steps == 0)
-		clr->ratio = 0.0f;
-	else
-		clr->ratio = (float)clr->curr_step / (float)clr->steps;
 }
 
 int	color_inter(float ratio, int f_color, int s_color)

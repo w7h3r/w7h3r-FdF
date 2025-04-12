@@ -17,7 +17,7 @@
 # define READ_BUFFER_SIZE 512
 #endif
 
-# define V_FACTOR 0.21
+# define V_FACTOR 0.20
 # define H_FACTOR 0.51
 
 # define W_HE 800

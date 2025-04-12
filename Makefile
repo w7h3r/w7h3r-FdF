@@ -14,6 +14,7 @@ SRC= src/init.c \
 	 src/misc_utils.c \
 	 src/color.c \
 	 src/hooks.c \
+	 src/draw_utils.c \
 	 lib/get_next_line/get_next_line.c \
 	 lib/get_next_line/get_next_line_utils.c \
 
