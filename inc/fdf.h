@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:16:00 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/11 02:24:55 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/12 20:50:51 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # define READ_BUFFER_SIZE 512
 #endif
 
-# define SIN_30 0.316025
-# define COS_30 0.5
+# define V_FACTOR 0.21
+# define H_FACTOR 0.51
 
 # define W_HE 1200
 # define W_WI 1600
-# define SCALE 6
+# define SCALE 21
 
 /*
  *	t_cell is a struct that contains info of each point on the map. 
@@ -44,7 +44,15 @@ typedef struct s_map {
 	t_cell	**inf;
 	int		x;
 	int		y;
+	int		z_scale;
 }	t_map;
+
+typedef struct s_color {
+	int		steps;
+	int		curr_step;
+	float	ratio;
+	int		color;
+}	t_color;
 
 typedef struct s_pos {
 	int	x0;
@@ -80,15 +88,22 @@ typedef struct s_data {
 }	t_data;
 
 void	read_data(t_data *data, const char *file);
-t_pos	isometric_points(t_cell first, t_cell second);
+int		ft_strcspn(char *str, char c);
+t_pos	isometric_points(t_cell first, t_cell second, int z_scale);
 
 void	init(t_data *data);
 int		count_line(const char *file);
 int		count_space(const char *file);
 void	free_double(char **str0, char *str1);
 void	free_map(t_map *map);
+void	free_data(t_data *data);
 void	put_pixel_to_img(t_data *data, int x, int y, int color);
 void	draw_map(t_data *data);
+void	calculate_z_scale(t_map *map);
+void	hook_inputs(t_data *data);
+
+void	set_color(t_color *clr);
+int		color_inter(float ratio, int f_color, int s_color);
 
 int	abs(int	num);
 
