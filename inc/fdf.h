@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:16:00 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/14 00:46:18 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/14 01:04:10 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 #ifndef READ_BUFFER_SIZE
-# define READ_BUFFER_SIZE 512
+# define READ_BUFFER_SIZE 1024
 #endif
 
 # define V_FACTOR 0.21

@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:50:15 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/14 00:54:15 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/14 01:17:08 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,15 +159,19 @@ int	is_map_rect(const char *file)
 		return (close(fd), 0);
 	exp_len = count_words(line, ' ');
 	free(line);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		curr_len = count_words(line, ' ');
 		if (curr_len != exp_len)
 		{
 			gnl_cleaner(fd);
-			return (close(fd), free(line), 0);
+			free(line);
+			close(fd);
+			return (0);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (1);

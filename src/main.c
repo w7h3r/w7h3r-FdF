@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:19:06 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/14 00:27:02 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/14 01:05:13 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../lib/libft/libft.h"
 #include "../lib/ft_printf/include/ft_printf.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 void	arg_control(char **argv)
 {
