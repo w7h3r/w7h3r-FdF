@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:08:45 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/12 20:48:48 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/14 00:30:05 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,18 @@ static void	apply_isometric_to_point(int *x, int *y, int z, int scale)
 	int	base_x;
 	int	base_y;
 
-	(void)scale;
 	base_x = *x;
 	base_y = *y;
 	*x = (base_x - base_y) * H_FACTOR;
-	*y = (base_x + base_y) * V_FACTOR - z;
+	*y = (base_x + base_y) * V_FACTOR - ((float)z * scale / 10);
+}
+
+void	get_proj_factor(t_map *map)
+{
+	if (map->y * map->x > 200)
+		map->factor = 4;
+	else
+		map->factor = 2 + ((int)map->scale / 10);
 }
 
 float	get_scale(t_map map)
@@ -44,15 +51,21 @@ float	get_scale(t_map map)
 	x_scale = (float)W_WI / map.x;
 	y_scale = (float)W_HE / map.y;
 	if (x_scale >= y_scale)
-		return (x_scale);
+	{
+		if (y_scale - 30 > 0)
+			return (y_scale - 30);
+		else
+			return (y_scale);
+	}
 	else
 		return (y_scale - 30);
 }
 
-t_pos	isometric_points(t_cell first, t_cell second, float scale)
+t_pos	isometric_points(t_cell first, t_cell second, float scale, int factor)
 {
 	t_pos	pos;
 
+	(void)factor;
 	first.x *= scale;
 	first.y *= scale;
 	second.x *= scale;

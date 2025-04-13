@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:16:00 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/13 18:48:16 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/14 00:33:19 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define READ_BUFFER_SIZE 512
 #endif
 
-# define V_FACTOR 0.20
+# define V_FACTOR 0.21
 # define H_FACTOR 0.51
 
 # define W_HE 800
@@ -44,6 +44,7 @@ typedef struct s_map {
 	int		x;
 	int		y;
 	int		scale;
+	int		factor;
 }	t_map;
 
 typedef struct s_color {
@@ -88,7 +89,7 @@ typedef struct s_data {
 
 void	read_data(t_data *data, const char *file);
 int		ft_strcspn(char *str, char c);
-t_pos	isometric_points(t_cell first, t_cell second, float scale);
+t_pos	isometric_points(t_cell first, t_cell second, float scale, int factor);
 
 void	init(t_data *data);
 int		count_line(const char *file);
@@ -100,7 +101,7 @@ void	put_pixel_to_img(t_data *data, int x, int y, int color);
 void	draw_map(t_data *data);
 void	hook_inputs(t_data *data);
 float	get_scale(t_map map);
-
+void	get_proj_factor(t_map *map);
 void	set_color(t_color *clr);
 int		color_inter(float ratio, int f_color, int s_color);
 
