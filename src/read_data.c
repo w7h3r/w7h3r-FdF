@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:50:15 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/11 00:55:52 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:57:50 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ t_cell	insert_cells(char *cell)
 	{
 		split_buffer = ft_split(cell, ',');
 		if (!split_buffer)
+		{
 			exit(1);
+		}
 		res.value = ft_atoi(split_buffer[0]);
 		res.color = ft_atoi_base(&split_buffer[1][2], 16);
 		free_double(split_buffer, NULL);
@@ -107,15 +109,80 @@ void	insert_map(t_map *map, const char *file)
 	close (fd);
 }
 
+void	gnl_cleaner(int fd)
+{
+	char	*dummy;
+
+	dummy = get_next_line(fd);
+	while (dummy)
+	{
+		free(dummy);
+		dummy = get_next_line(fd);
+	}
+	free(dummy);
+}
+
+int	count_words(const char *line, char sep)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		while (line[i] == sep)
+			i++;
+		if (line[i] && line[i] != sep)
+		{
+			count++;
+			while (line[i] && line[i] != sep)
+				i++;
+		}
+	}
+	return (count);
+}
+
+int	is_map_rect(const char *file)
+{
+	int		fd;
+	char	*line;
+	int		exp_len;
+	int		curr_len;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	line = get_next_line(fd);
+	if (!line)
+		return (close(fd), 0);
+	exp_len = count_words(line, ' ');
+	free(line);
+	while ((line = get_next_line(fd)))
+	{
+		curr_len = count_words(line, ' ');
+		if (curr_len != exp_len)
+		{
+			gnl_cleaner(fd);
+			return (close(fd), free(line), 0);
+		}
+		free(line);
+	}
+	close(fd);
+	return (1);
+}
+
 void	read_data(t_data *data, const char *file)
 {
 	int	row;
 
+	if (!(is_map_rect(file)))
+		exit(1);
 	data->map.y = count_line(file);
 	data->map.x = count_line_lenght(file);
 	data->map.inf = (t_cell **)malloc(sizeof(t_cell *) * data->map.y);
 	if (!data->map.inf)
-		exit(0);
+		exit(1);
 	row = 0;
 	while (row < data->map.y)
 	{

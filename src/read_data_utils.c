@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:00:15 by muokcan           #+#    #+#             */
-/*   Updated: 2025/03/10 15:01:14 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:12:25 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,15 @@ void	free_map(t_map *map)
 {
 	int	i;
 
+	if (!map || !map->inf)
+		return ;
 	i = 0;
 	while (i < map->y)
 	{
-		free(map->inf[i]);
+		if (map->inf[i])
+			free(map->inf[i]);
 		i++;
 	}
 	free(map->inf);
+	map->inf = NULL;
 }

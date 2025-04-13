@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 02:35:26 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/12 18:22:33 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:27:00 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	free_data(t_data *data)
 	if (data->mlx.win)
 		mlx_destroy_window(data->mlx.mlx, data->mlx.win);
 	if (data->mlx.mlx)
+	{
 		mlx_destroy_display(data->mlx.mlx);
-	free(data->mlx.mlx);
+		free(data->mlx.mlx);
+	}
 	free_map(&data->map);
 }
 
