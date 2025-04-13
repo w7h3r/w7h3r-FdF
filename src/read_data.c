@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:50:15 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/13 18:57:50 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/14 00:54:15 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ t_cell	insert_cells(char *cell)
 			exit(1);
 		}
 		res.value = ft_atoi(split_buffer[0]);
-		res.color = ft_atoi_base(&split_buffer[1][2], 16);
+		if (split_buffer[1] && ft_strlen(split_buffer[1]) > 2) // I HAVE NO IDEA WHAT IS THIS LINE DOES BU IT WORKS.
+			res.color = ft_atoi_base(&split_buffer[1][2], 16);
 		free_double(split_buffer, NULL);
 	}
 	else

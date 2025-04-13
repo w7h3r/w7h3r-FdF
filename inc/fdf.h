@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:16:00 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/14 00:33:19 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/14 00:46:18 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_data {
 
 void	read_data(t_data *data, const char *file);
 int		ft_strcspn(char *str, char c);
-t_pos	isometric_points(t_cell first, t_cell second, float scale, int factor);
+t_pos	isometric_points(t_cell first, t_cell second, float scale);
 
 void	init(t_data *data);
 int		count_line(const char *file);

@@ -6,7 +6,7 @@
 /*   By: muokcan <muokcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:08:45 by muokcan           #+#    #+#             */
-/*   Updated: 2025/04/14 00:30:05 by muokcan          ###   ########.fr       */
+/*   Updated: 2025/04/14 00:50:20 by muokcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,10 @@ float	get_scale(t_map map)
 		return (y_scale - 30);
 }
 
-t_pos	isometric_points(t_cell first, t_cell second, float scale, int factor)
+t_pos	isometric_points(t_cell first, t_cell second, float scale)
 {
 	t_pos	pos;
 
-	(void)factor;
 	first.x *= scale;
 	first.y *= scale;
 	second.x *= scale;
