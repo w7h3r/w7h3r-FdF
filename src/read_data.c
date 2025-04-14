@@ -162,6 +162,7 @@ int	is_map_rect(const char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
+		line[ft_strcspn(line, '\n')] = '\0';
 		curr_len = count_words(line, ' ');
 		if (curr_len != exp_len)
 		{
