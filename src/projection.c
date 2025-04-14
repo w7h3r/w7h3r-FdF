@@ -24,7 +24,7 @@
  * and shift the map through the center of the window.
  */
 
-static void	apply_isometric_to_point(int *x, int *y, int z, int scale)
+static void	apply_isometric_to_point(int *x, int *y, int z, float scale)
 {
 	int	base_x;
 	int	base_y;
@@ -32,15 +32,12 @@ static void	apply_isometric_to_point(int *x, int *y, int z, int scale)
 	base_x = *x;
 	base_y = *y;
 	*x = (base_x - base_y) * H_FACTOR;
-	*y = (base_x + base_y) * V_FACTOR - ((float)z * scale / 10);
+	*y = (base_x + base_y) * V_FACTOR - (z * scale / 10);
 }
 
 void	get_proj_factor(t_map *map)
 {
-	if (map->y * map->x > 200)
-		map->factor = 4;
-	else
-		map->factor = 2 + ((int)map->scale / 10);
+	map->factor = fmax(2, (int)(map->scale / 15));
 }
 
 float	get_scale(t_map map)

@@ -14,9 +14,16 @@
 #include "../lib/libft/libft.h"
 #include "../lib/ft_printf/include/ft_printf.h"
 #include "../lib/get_next_line/get_next_line.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+
+void	err_exit(const char *err)
+{
+	perror(err);
+	exit(1);
+}
 
 int	count_line_lenght(const char *file)
 {
@@ -52,12 +59,11 @@ t_cell	insert_cells(char *cell)
 	if (ft_strchr(cell, ','))
 	{
 		split_buffer = ft_split(cell, ',');
-		if (!split_buffer)
-		{
-			exit(1);
-		}
+		if (!split_buffer || !split_buffer[0])
+			err_exit("Error: Cell split failed");
 		res.value = ft_atoi(split_buffer[0]);
-		if (split_buffer[1] && ft_strlen(split_buffer[1]) > 2) // I HAVE NO IDEA WHAT IS THIS LINE DOES BU IT WORKS.
+		if (split_buffer[1] && ft_strlen(split_buffer[1]) > 2 &&
+				split_buffer[1][0] == '0' && split_buffer[1][1] == 'x')
 			res.color = ft_atoi_base(&split_buffer[1][2], 16);
 		free_double(split_buffer, NULL);
 	}
@@ -77,10 +83,11 @@ int	check_fd(t_map *map, const char *file)
 	if (fd < 0)
 	{
 		free_map(map);
-		exit (1);
+		err_exit("Error: Invalid fd value");
 	}
 	return (fd);
 }
+
 
 void	insert_map(t_map *map, const char *file)
 {
@@ -91,8 +98,8 @@ void	insert_map(t_map *map, const char *file)
 	int		col;
 
 	fd = check_fd(map, file);
-	row = -1;
-	while (++row < map->y)
+	row = 1;
+	while (row < map->y)
 	{
 		temp = get_next_line(fd);
 		if (!temp)
@@ -106,21 +113,22 @@ void	insert_map(t_map *map, const char *file)
 			map->inf[row][col].y = row;
 		}
 		free_double(split_buffer, temp);
+		row++;
 	}
 	close (fd);
 }
 
 void	gnl_cleaner(int fd)
 {
-	char	*dummy;
+	char	*line;
 
-	dummy = get_next_line(fd);
-	while (dummy)
+	line = get_next_line(fd);
+	while (line)
 	{
-		free(dummy);
-		dummy = get_next_line(fd);
+		free(line);
+		line = get_next_line(fd);
 	}
-	free(dummy);
+	free(line);
 }
 
 int	count_words(const char *line, char sep)
@@ -162,7 +170,6 @@ int	is_map_rect(const char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
-		line[ft_strcspn(line, '\n')] = '\0';
 		curr_len = count_words(line, ' ');
 		if (curr_len != exp_len)
 		{
@@ -178,29 +185,36 @@ int	is_map_rect(const char *file)
 	return (1);
 }
 
-void	read_data(t_data *data, const char *file)
+void	allocate_map(t_data *data)
 {
 	int	row;
 
-	if (!(is_map_rect(file)))
-		exit(1);
-	data->map.y = count_line(file);
-	data->map.x = count_line_lenght(file);
 	data->map.inf = (t_cell **)malloc(sizeof(t_cell *) * data->map.y);
 	if (!data->map.inf)
-		exit(1);
+		err_exit("Error: Map allocation failed");
 	row = 0;
 	while (row < data->map.y)
 	{
 		data->map.inf[row] = (t_cell *)malloc(sizeof(t_cell) * data->map.x);
 		if (!data->map.inf[row])
 		{
-			while (row--)
+			while (--row)
 				free(data->map.inf[row]);
 			free(data->map.inf);
-			exit(1);
+			err_exit("Error: Map allocation failed");
 		}
 		row++;
 	}
+}
+
+void	read_data(t_data *data, const char *file)
+{
+
+	if (!(is_map_rect(file)))
+		exit(1);
+	data->map.y = count_line(file);
+	data->map.x = count_line_lenght(file);
+	allocate_map(data);
 	insert_map(&data->map, file);
+	ft_printf("%d\n", data->map.inf[0][0].color);
 }
