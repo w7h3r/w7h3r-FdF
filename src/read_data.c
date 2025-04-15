@@ -139,6 +139,26 @@ t_cell	**alloc_insert_cells(char **map, int h, int w)
 	return (cells);
 }
 
+int		is_map_rectangle(char **map, int w)
+{
+	int	exp_len;
+	int	curr_len;
+	int	row;
+
+	if (!map)
+		return (1);
+	exp_len = w;
+	row = 1;
+	while (map[row])
+	{
+		curr_len = get_map_w(map[row]);
+		if (curr_len != exp_len)
+			return (1);
+		row++;
+	}
+	return (0);
+}
+
 void	read_data(t_data *data, const char *file)
 {
 	char	*file_con;
@@ -154,6 +174,10 @@ void	read_data(t_data *data, const char *file)
 		err_exit("Error: Content split failed");
 	h = get_map_h(t_map);
 	w = get_map_w(t_map[0]);
+	if (is_map_rectangle(t_map, w))
+	{
+		err_exit("Error: Map must be rectangle shape");
+	}
 	data->map.inf = alloc_insert_cells(t_map, h, w);
 	data->map.x = w;
 	data->map.y = h;
