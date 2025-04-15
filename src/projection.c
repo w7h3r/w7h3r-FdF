@@ -54,10 +54,11 @@ float	get_scale(t_map map)
 		return (y_scale);
 }
 
-t_pos	isometric_points(t_cell first, t_cell second, float scale)
+t_pos	isometric_points(t_map map, t_cell first, t_cell second, float scale)
 {
 	t_pos	pos;
 
+	(void)map;
 	first.x *= scale;
 	first.y *= scale;
 	second.x *= scale;
@@ -65,9 +66,9 @@ t_pos	isometric_points(t_cell first, t_cell second, float scale)
 	apply_isometric_to_point(&first.x, &first.y, first.value, scale);
 	apply_isometric_to_point(&second.x, &second.y, second.value, scale);
 	first.x += W_WI / 2;
-	first.y += W_HE / 2;
+	first.y += (W_HE / 2) - (map.y / 2);
 	second.x += W_WI / 2;
-	second.y += W_HE / 2;
+	second.y += (W_HE / 2) - (map.y / 2);
 	pos.x0 = first.x;
 	pos.y0 = first.y;
 	pos.z0 = first.value;

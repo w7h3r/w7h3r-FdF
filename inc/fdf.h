@@ -89,7 +89,7 @@ typedef struct s_data {
 
 void	read_data(t_data *data, const char *file);
 int		ft_strcspn(char *str, char c);
-t_pos	isometric_points(t_cell first, t_cell second, float scale);
+t_pos	isometric_points(t_map map, t_cell first, t_cell second, float scale);
 
 void	init(t_data *data);
 void	free_double(char **str0, char *str1);
