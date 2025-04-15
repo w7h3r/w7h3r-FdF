@@ -92,8 +92,6 @@ int		ft_strcspn(char *str, char c);
 t_pos	isometric_points(t_cell first, t_cell second, float scale);
 
 void	init(t_data *data);
-int		count_line(const char *file);
-int		count_space(const char *file);
 void	free_double(char **str0, char *str1);
 void	free_map(t_map *map);
 void	free_data(t_data *data);

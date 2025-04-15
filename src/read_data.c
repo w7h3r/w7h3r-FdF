@@ -25,196 +25,138 @@ void	err_exit(const char *err)
 	exit(1);
 }
 
-int	count_line_lenght(const char *file)
+char	*get_file_content(const char *file)
 {
-	int		len;
 	int		fd;
+	char	*con;
+	char	*line_buffer;
 	char	*temp;
-	char	**split_buffer;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		exit(1);
-	temp = get_next_line(fd);
-	if (!temp)
-	{
-		close(fd);
-		exit(1);
-	}
-	temp[ft_strcspn(temp, '\n')] = '\0';
-	split_buffer = ft_split(temp, ' ');
-	len = 0;
-	while (split_buffer[len])
-		len++;
-	free_double(split_buffer, temp);
-	close(fd);
-	return (len);
-}
-
-t_cell	insert_cells(char *cell)
-{
-	t_cell	res;
-	char	**split_buffer;
-
-	if (ft_strchr(cell, ','))
-	{
-		split_buffer = ft_split(cell, ',');
-		if (!split_buffer || !split_buffer[0])
-			err_exit("Error: Cell split failed");
-		res.value = ft_atoi(split_buffer[0]);
-		if (split_buffer[1] && ft_strlen(split_buffer[1]) > 2 &&
-				split_buffer[1][0] == '0' && split_buffer[1][1] == 'x')
-			res.color = ft_atoi_base(&split_buffer[1][2], 16);
-		free_double(split_buffer, NULL);
-	}
-	else
-	{
-		res.value = ft_atoi(cell);
-		res.color = ft_atoi_base("0xFFFFFF", 16);
-	}
-	return (res);
-}
-
-int	check_fd(t_map *map, const char *file)
-{
-	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
+		err_exit("Error: Invalid fd");
+	con = ft_strdup("");
+	if (!con)
+		err_exit("Error: strdup() failed");
+	line_buffer = get_next_line(fd);
+	while (line_buffer)
 	{
-		free_map(map);
-		err_exit("Error: Invalid fd value");
+		temp = ft_strjoin(con, line_buffer);
+		if (!temp)
+		{
+			free(con);
+			free(line_buffer);
+			err_exit("Error: ft_strjoin failed");
+		}
+		free(con);
+		free(line_buffer);
+		line_buffer = get_next_line(fd);
+		con = temp;
 	}
-	return (fd);
+	close(fd);
+	return (con);
 }
 
-
-void	insert_map(t_map *map, const char *file)
+static char	**split_content(char *con)
 {
-	char	*temp;
+	return (ft_split(con, '\n'));
+}
+
+static	int	get_map_h(char **map)
+{
+	int	nl_count;
+
+	nl_count = 0;
+	while (map[nl_count])
+		nl_count++;
+	return (nl_count);
+}
+
+static	int	get_map_w(char *map)
+{
 	char	**split_buffer;
-	int		fd;
+	int		units;
+	
+	split_buffer = ft_split(map, ' ');
+	units = 0;
+	while (split_buffer[units])
+		units++;
+	free_double(split_buffer, NULL);
+	return (units);
+}
+
+t_cell	insert_cell(char *cell_data, int col, int row)
+{
+	t_cell 	cell;
+	char	**units;
+
+	cell.x = col;
+	cell.y = row;
+	cell.value = 0;
+	cell.color = 0xFFFFFF;
+	if (ft_strchr(cell_data, ','))
+	{
+		units = ft_split(cell_data, ',');
+		if (units && units[0])
+			cell.value = ft_atoi(units[0]);
+		if (units && units[1])
+			cell.color = ft_atoi_base(&units[1][2], 16);
+		free_double(units, NULL);
+	}
+	else
+		cell.value = ft_atoi(cell_data);
+	return (cell);
+}
+
+t_cell	**alloc_insert_cells(char **map, int h, int w)
+{
+	t_cell	**cells;
+	char	**split_buffer;
 	int		row;
 	int		col;
 
-	fd = check_fd(map, file);
-	row = 1;
-	while (row < map->y)
-	{
-		temp = get_next_line(fd);
-		if (!temp)
-			break ;
-		split_buffer = ft_split(temp, ' ');
-		col = -1;
-		while (++col < map->x)
-		{
-			map->inf[row][col] = insert_cells(split_buffer[col]);
-			map->inf[row][col].x = col;
-			map->inf[row][col].y = row;
-		}
-		free_double(split_buffer, temp);
-		row++;
-	}
-	close (fd);
-}
-
-void	gnl_cleaner(int fd)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line)
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-}
-
-int	count_words(const char *line, char sep)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (line[i])
-	{
-		while (line[i] == sep)
-			i++;
-		if (line[i] && line[i] != sep)
-		{
-			count++;
-			while (line[i] && line[i] != sep)
-				i++;
-		}
-	}
-	return (count);
-}
-
-int	is_map_rect(const char *file)
-{
-	int		fd;
-	char	*line;
-	int		exp_len;
-	int		curr_len;
-
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	line = get_next_line(fd);
-	if (!line)
-		return (close(fd), 0);
-	exp_len = count_words(line, ' ');
-	free(line);
-	line = get_next_line(fd);
-	while (line)
-	{
-		curr_len = count_words(line, ' ');
-		if (curr_len != exp_len)
-		{
-			gnl_cleaner(fd);
-			free(line);
-			close(fd);
-			return (0);
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (1);
-}
-
-void	allocate_map(t_data *data)
-{
-	int	row;
-
-	data->map.inf = (t_cell **)malloc(sizeof(t_cell *) * data->map.y);
-	if (!data->map.inf)
-		err_exit("Error: Map allocation failed");
+	cells = malloc(sizeof(t_cell *) * h);
+	if (!cells)
+		err_exit("Error: Malloc failed. init_map_cells(): 86");
 	row = 0;
-	while (row < data->map.y)
+	while (row < h)
 	{
-		data->map.inf[row] = (t_cell *)malloc(sizeof(t_cell) * data->map.x);
-		if (!data->map.inf[row])
+		split_buffer = ft_split(map[row], ' ');
+		col = 0;
+		cells[row] = malloc(sizeof(t_cell) * w);
+		if (!cells[row])
 		{
-			while (--row)
-				free(data->map.inf[row]);
-			free(data->map.inf);
-			err_exit("Error: Map allocation failed");
+			err_exit("Error: Malloc failed. init_map_cells(): 95");
 		}
+		while (col < w)
+		{
+			cells[row][col] = insert_cell(split_buffer[col], col, row);
+			col++;
+		}
+		free_double(split_buffer, NULL);
 		row++;
 	}
+	return (cells);
 }
 
 void	read_data(t_data *data, const char *file)
 {
+	char	*file_con;
+	char	**t_map;
+	int		w;
+	int		h;
 
-	if (!(is_map_rect(file)))
-		exit(1);
-	data->map.y = count_line(file);
-	data->map.x = count_line_lenght(file);
-	allocate_map(data);
-	insert_map(&data->map, file);
-	ft_printf("%d\n", data->map.inf[0][0].color);
+	file_con = get_file_content(file);
+	if (!file_con)
+		err_exit("Error: File read failed");
+	t_map = split_content(file_con);
+	if (!t_map)
+		err_exit("Error: Content split failed");
+	h = get_map_h(t_map);
+	w = get_map_w(t_map[0]);
+	data->map.inf = alloc_insert_cells(t_map, h, w);
+	data->map.x = w;
+	data->map.y = h;
+	free(file_con);
+	free_double(t_map, NULL);
 }
