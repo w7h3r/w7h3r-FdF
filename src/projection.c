@@ -40,7 +40,6 @@ t_pos	isometric_points(t_map map, t_cell first, t_cell second, float scale)
 {
 	t_pos	pos;
 
-	(void)map;
 	first.x *= scale;
 	first.y *= scale;
 	second.x *= scale;
