@@ -35,7 +35,6 @@ typedef struct s_map {
 	int		x;
 	int		y;
 	int		scale;
-	int		factor;
 }	t_map;
 
 typedef struct s_color {
