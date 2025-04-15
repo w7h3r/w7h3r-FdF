@@ -176,6 +176,7 @@ void	read_data(t_data *data, const char *file)
 	w = get_map_w(t_map[0]);
 	if (is_map_rectangle(t_map, w))
 	{
+		free_double(t_map, file_con);
 		err_exit("Error: Map must be rectangle shape");
 	}
 	data->map.inf = alloc_insert_cells(t_map, h, w);
