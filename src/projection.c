@@ -12,6 +12,7 @@
 
 #include <math.h>
 #include "../inc/fdf.h"
+#include "../lib/ft_printf/include/ft_printf.h"
 
 /*
  * apply_isometric_to_point();
@@ -45,17 +46,12 @@ float	get_scale(t_map map)
 	float	x_scale;
 	float	y_scale;
 
-	x_scale = (float)W_WI / map.x;
-	y_scale = (float)W_HE / map.y;
+	x_scale = ((float)W_WI - 120) / map.x;
+	y_scale = ((float)W_HE - 80) / map.y;
 	if (x_scale >= y_scale)
-	{
-		if (y_scale - 30 > 0)
-			return (y_scale - 30);
-		else
-			return (y_scale);
-	}
+		return (x_scale);
 	else
-		return (y_scale - 30);
+		return (y_scale);
 }
 
 t_pos	isometric_points(t_cell first, t_cell second, float scale)

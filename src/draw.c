@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
+#include "../lib/ft_printf/include/ft_printf.h"
 
 static void	draw_line_controls(t_line *line, t_pos *pos)
 {
@@ -92,6 +93,7 @@ void	draw_map(t_data *data)
 	int		y;
 
 	data->map.scale = get_scale(data->map);
+	ft_printf("%d", data->map.scale);
 	y = 0;
 	while (y < data->map.y)
 	{
