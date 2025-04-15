@@ -12,9 +12,7 @@
 
 #include "../inc/fdf.h"
 #include "../lib/libft/libft.h"
-#include "../lib/ft_printf/include/ft_printf.h"
 #include "../lib/get_next_line/get_next_line.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>

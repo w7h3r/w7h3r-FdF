@@ -12,9 +12,6 @@
 
 #include "../inc/fdf.h"
 #include "../lib/minilibx/mlx.h"
-#include "../lib/libft/libft.h"
-#include "../lib/ft_printf/include/ft_printf.h"
-#include <stdlib.h>
 #include <unistd.h>
 
 int	main(int argc, char **argv)

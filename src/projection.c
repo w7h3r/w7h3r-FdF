@@ -10,20 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "../inc/fdf.h"
-#include "../lib/ft_printf/include/ft_printf.h"
-
-/*
- * apply_isometric_to_point();
- * is setting points due to cos(30) and sin(30).
- * SCALE is a constant define. This isn't a sustainable practice though.
- * 
- * in isometric points();
- * Multiply the x and y points positions as scale,
- * apply isometric projection to points
- * and shift the map through the center of the window.
- */
 
 static void	apply_isometric_to_point(int *x, int *y, int z, float scale)
 {
@@ -34,11 +21,6 @@ static void	apply_isometric_to_point(int *x, int *y, int z, float scale)
 	base_y = *y;
 	*x = (base_x - base_y) * H_FACTOR;
 	*y = (base_x + base_y) * V_FACTOR - (z * scale / 10);
-}
-
-void	get_proj_factor(t_map *map)
-{
-	map->factor = fmax(2, (int)(map->scale / 15));
 }
 
 float	get_scale(t_map map)

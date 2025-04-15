@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
-#include "../lib/ft_printf/include/ft_printf.h"
 
 static void	draw_line_controls(t_line *line, t_pos *pos)
 {
