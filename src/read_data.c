@@ -19,10 +19,18 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-void	err_exit(const char *err)
+void	get_line_content(char *temp, char **con, char **line_buffer, int fd)
 {
-	perror(err);
-	exit(1);
+	if (!temp)
+	{
+		free(*con);
+		free(*line_buffer);
+		err_exit("Error: ft_strjoin failed");
+	}
+	free(*con);
+	*con = temp;
+	free(*line_buffer);
+	*line_buffer = get_next_line(fd);
 }
 
 char	*get_file_content(const char *file)
@@ -42,52 +50,15 @@ char	*get_file_content(const char *file)
 	while (line_buffer)
 	{
 		temp = ft_strjoin(con, line_buffer);
-		if (!temp)
-		{
-			free(con);
-			free(line_buffer);
-			err_exit("Error: ft_strjoin failed");
-		}
-		free(con);
-		free(line_buffer);
-		line_buffer = get_next_line(fd);
-		con = temp;
+		get_line_content(temp, &con, &line_buffer, fd);
 	}
 	close(fd);
 	return (con);
 }
 
-static char	**split_content(char *con)
-{
-	return (ft_split(con, '\n'));
-}
-
-static	int	get_map_h(char **map)
-{
-	int	nl_count;
-
-	nl_count = 0;
-	while (map[nl_count])
-		nl_count++;
-	return (nl_count);
-}
-
-static	int	get_map_w(char *map)
-{
-	char	**split_buffer;
-	int		units;
-	
-	split_buffer = ft_split(map, ' ');
-	units = 0;
-	while (split_buffer[units])
-		units++;
-	free_double(split_buffer, NULL);
-	return (units);
-}
-
 t_cell	insert_cell(char *cell_data, int col, int row)
 {
-	t_cell 	cell;
+	t_cell	cell;
 	char	**units;
 
 	cell.x = col;
@@ -118,45 +89,22 @@ t_cell	**alloc_insert_cells(char **map, int h, int w)
 	cells = malloc(sizeof(t_cell *) * h);
 	if (!cells)
 		err_exit("Error: Malloc failed. init_map_cells(): 86");
-	row = 0;
-	while (row < h)
+	row = -1;
+	while (++row < h)
 	{
 		split_buffer = ft_split(map[row], ' ');
 		col = 0;
 		cells[row] = malloc(sizeof(t_cell) * w);
 		if (!cells[row])
-		{
 			err_exit("Error: Malloc failed. init_map_cells(): 95");
-		}
 		while (col < w)
 		{
 			cells[row][col] = insert_cell(split_buffer[col], col, row);
 			col++;
 		}
 		free_double(split_buffer, NULL);
-		row++;
 	}
 	return (cells);
-}
-
-int		is_map_rectangle(char **map, int w)
-{
-	int	exp_len;
-	int	curr_len;
-	int	row;
-
-	if (!map)
-		return (1);
-	exp_len = w;
-	row = 1;
-	while (map[row])
-	{
-		curr_len = get_map_w(map[row]);
-		if (curr_len != exp_len)
-			return (1);
-		row++;
-	}
-	return (0);
 }
 
 void	read_data(t_data *data, const char *file)

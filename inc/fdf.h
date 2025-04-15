@@ -13,24 +13,15 @@
 #ifndef FDF_H
 # define FDF_H
 
-#ifndef READ_BUFFER_SIZE
-# define READ_BUFFER_SIZE 1024
-#endif
+# ifndef READ_BUFFER_SIZE
+#  define READ_BUFFER_SIZE 1024
+# endif
 
 # define V_FACTOR 0.21
 # define H_FACTOR 0.51
 
 # define W_HE 800
 # define W_WI 1200
-
-/*
- *	t_cell is a struct that contains info of each point on the map. 
- *
- *	Value represents 'z' coordinate in fact and i know it must be defined in a more clear way.
- *	Nevertheless i'm too lazy to modify every fucking file in project, so i'll leave it be.
- *
- *	in t_map x is width and y is height of map. Sorry for my bad naming again.
- */
 
 typedef struct s_cell {
 	int	x;
@@ -71,7 +62,7 @@ typedef struct s_line {
 	int	err;
 	int	e2;
 }	t_line;
-	
+
 typedef struct s_mlx {
 	void	*mlx;
 	void	*win;
@@ -103,6 +94,12 @@ void	get_proj_factor(t_map *map);
 void	set_color(t_color *clr);
 int		color_inter(float ratio, int f_color, int s_color);
 
-int	abs(int	num);
+int		abs(int num);
+char	**split_content(char *con);
+int		get_map_h(char **map);
+int		get_map_w(char *map);
+int		is_map_rectangle(char **map, int w);
+
+void	err_exit(const char *err);
 
 #endif

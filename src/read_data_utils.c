@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../lib/get_next_line/get_next_line.h"
+#include "../lib/libft/libft.h"
 #include "../inc/fdf.h"
 #include <fcntl.h>
 #include <unistd.h>
@@ -38,24 +39,6 @@ int	count_line(const char *file)
 	return (nl);
 }
 
-void	free_double(char **str0, char *str1)
-{
-	int	i;
-
-	if (str0)
-	{
-		i = 0;
-		while (str0[i])
-		{
-			free(str0[i]);
-			i++;
-		}
-		free(str0);
-	}
-	if (str1)
-		free(str1);
-}
-
 void	free_map(t_map *map)
 {
 	int	i;
@@ -71,4 +54,47 @@ void	free_map(t_map *map)
 	}
 	free(map->inf);
 	map->inf = NULL;
+}
+
+int	get_map_h(char **map)
+{
+	int	nl_count;
+
+	nl_count = 0;
+	while (map[nl_count])
+		nl_count++;
+	return (nl_count);
+}
+
+int	get_map_w(char *map)
+{
+	char	**split_buffer;
+	int		units;
+
+	split_buffer = ft_split(map, ' ');
+	units = 0;
+	while (split_buffer[units])
+		units++;
+	free_double(split_buffer, NULL);
+	return (units);
+}
+
+int	is_map_rectangle(char **map, int w)
+{
+	int	exp_len;
+	int	curr_len;
+	int	row;
+
+	if (!map)
+		return (1);
+	exp_len = w;
+	row = 1;
+	while (map[row])
+	{
+		curr_len = get_map_w(map[row]);
+		if (curr_len != exp_len)
+			return (1);
+		row++;
+	}
+	return (0);
 }

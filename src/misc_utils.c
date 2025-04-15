@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "../lib/libft/libft.h"
+
 int	abs(int num)
 {
 	if (num < 0)
@@ -29,4 +33,33 @@ int	ft_strcspn(char *str, char c)
 		target_idx++;
 	}
 	return (target_idx);
+}
+
+void	err_exit(const char *err)
+{
+	perror(err);
+	exit(1);
+}
+
+char	**split_content(char *con)
+{
+	return (ft_split(con, '\n'));
+}
+
+void	free_double(char **str0, char *str1)
+{
+	int	i;
+
+	if (str0)
+	{
+		i = 0;
+		while (str0[i])
+		{
+			free(str0[i]);
+			i++;
+		}
+		free(str0);
+	}
+	if (str1)
+		free(str1);
 }
