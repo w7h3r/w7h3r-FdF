@@ -23,28 +23,32 @@
 # define W_HE 800
 # define W_WI 1200
 
-typedef struct s_cell {
+typedef struct s_cell
+{
 	int	x;
 	int	y;
 	int	value;
 	int	color;
 }	t_cell;
 
-typedef struct s_map {
+typedef struct s_map
+{
 	t_cell	**inf;
 	int		x;
 	int		y;
 	int		scale;
 }	t_map;
 
-typedef struct s_color {
+typedef struct s_color
+{
 	int		steps;
 	int		curr_step;
 	float	ratio;
 	int		color;
 }	t_color;
 
-typedef struct s_pos {
+typedef struct s_pos
+{
 	int	x0;
 	int	y0;
 	int	z0;
@@ -53,7 +57,8 @@ typedef struct s_pos {
 	int	z1;
 }	t_pos;
 
-typedef struct s_line {
+typedef struct s_line
+{
 	int	dx;
 	int	dy;
 	int	sx;
@@ -62,7 +67,8 @@ typedef struct s_line {
 	int	e2;
 }	t_line;
 
-typedef struct s_mlx {
+typedef struct s_mlx
+{
 	void	*mlx;
 	void	*win;
 	void	*img;
@@ -72,7 +78,8 @@ typedef struct s_mlx {
 	int		endian;
 }	t_mlx;
 
-typedef struct s_data {
+typedef struct s_data
+{
 	t_map	map;
 	t_mlx	mlx;
 }	t_data;
