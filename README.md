@@ -45,8 +45,8 @@ It's all up to you. If you have enough time and energy for some extra points, go
 ## Preview
 
 <p align="left">
-  <img src="https://github.com/user-attachments/assets/ef430f0c-6bde-4034-9e8a-56974aa35a01" alt="Screenshot 1" height="300"/>
-  <img src="https://github.com/user-attachments/assets/6e60d77c-5563-42b7-a379-8698f904ea76" alt="Screenshot 2" height="300"/>
+  <img src="https://github.com/user-attachments/assets/ef430f0c-6bde-4034-9e8a-56974aa35a01" alt="Screenshot 1" height="300"/><br>
+  <img src="https://github.com/user-attachments/assets/6e60d77c-5563-42b7-a379-8698f904ea76" alt="Screenshot 2" height="325"/>
 </p>
 
 ---
