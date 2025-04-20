@@ -38,7 +38,7 @@ After completing this final step, you should be able to see a wireframe model of
 
 I didn’t have much time to implement the bonus features, so my project does not include zooming, rotation, or other additional -bonus- interactive controls.
 
-Nevertheless when you finish the mandatory part of the project, i assume that you're going to be knowledgable enough about the topics of FdF project. Because when you finish the isometric projection you can make it dynamic.
+Nevertheless when you finish the mandatory part of the project, i assume that you're going to be knowledgable enough about the topics of FdF project. So, when you finish the isometric projection you can make it dynamic.
 
 It's all up to you. If you have enough time and energy for some extra points, go for it.
 
