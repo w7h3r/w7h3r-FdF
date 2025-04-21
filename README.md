@@ -30,7 +30,7 @@ I was initially quite confused and unsure where to begin, so here's a basic road
 
 6. **Drawing the Wireframe**
    - Use **[Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)** (or any other line-drawing algorithm) to draw lines between adjacent points horizontally and vertically.
-   - Assign colors to lines based on elevation or use color interpolation.
+   - Assign colors to lines with using color interpolation.
 
 After completing this final step, you should be able to see a wireframe model of your map rendered in 2D, giving the illusion of 3D depth. Don't forget to test your program with various maps.
 
