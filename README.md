@@ -21,12 +21,12 @@ I was initially quite confused and unsure where to begin, so here's a basic road
 
 3. **Coordinate System and Scaling**
    - Determine a proper scale based on map dimensions and screen size.
-   - Center the model in the window for better visibility.
-
-    Note: I haven't did a proper centeralization for image because time limits of mine.
 
 5. **Projection Logic**
    - Convert 3D coordinates (x, y, z) into 2D screen coordinates using **[isometric projection](https://en.wikipedia.org/wiki/Isometric_projection)**.
+   - Center the model in the window for better visibility.
+
+    Note: I haven't did a proper centeralization for image because time limits of mine.
 
 6. **Drawing the Wireframe**
    - Use **[Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)** (or any other line-drawing algorithm) to draw lines between adjacent points horizontally and vertically.
