@@ -56,7 +56,8 @@ It's all up to you. If you have enough time and energy for some extra points, go
 ## Sources
 
 - https://m4nnb3ll.medium.com/fil-de-fer-fdf-the-first-graphical-project-at-42-the-network-5cce69203448  
-- https://en.wikipedia.org/wiki/Isometric_projection  
+- https://en.wikipedia.org/wiki/Isometric_projection
+- https://www.mathforengineers.com/math-calculators/3D-point-rotation-calculator.html#google_vignette
 - https://pikuma.com/blog/isometric-projection-in-games  
 - https://www.cs.put.poznan.pl/swilk/pmwiki/uploads/Dydaktyka/bresenham-int.pdf  
 - https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
