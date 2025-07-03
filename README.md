@@ -2,7 +2,7 @@
 
 FdF is a graphical project developed at **Ecole 42** that renders a 3D height map as a wireframe model in a 2D window using isometric projection.
 
-This project serves as an introduction to graphics programming and 42's graphic library Minilibx. It offers a good balance between algorithmic logic and graphical creativity.
+This project serves as an introduction to graphics programming and 42's graphic library [Minilibx](https://github.com/42paris/minilibx-linux). It offers a good balance between algorithmic logic and graphical creativity.
 
 I've found a lot of useful sources while building the program. You can find some of them [here](#sources).
 
