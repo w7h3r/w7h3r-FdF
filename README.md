@@ -34,8 +34,6 @@ I was initially quite confused and unsure where to begin, so here's a basic road
 
 After completing this final step, you should be able to see a wireframe model of your map rendered in 2D, giving the illusion of 3D depth. Don't forget to test your program with various maps.
 
-![9rd91u](https://github.com/user-attachments/assets/4f6b6b50-842c-4ce8-b461-bd5baad0fb1c)
-
 ## Bonus
 
 I didn’t have much time to implement the bonus features, so my project does not include zooming, rotation, or other additional -bonus- interactive controls.
